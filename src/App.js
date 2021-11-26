@@ -1,25 +1,77 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
-function App() {
+function Increment(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={()=>props.incrementCounter()}>Increment</button>
     </div>
-  );
+  )
+}
+
+function Decrement(props) {
+  return (
+    <div>
+      <button onClick={()=>props.decrementCounter()}>Decrement</button>
+    </div>
+  )
+}
+
+function Reset(props) {
+  return (
+    <div>
+      <button onClick={()=>props.resetCounter()}>Reset</button>
+    </div>
+  )
+}
+
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state={
+      counter: 0
+    }
+  }
+
+  resetCounter = () => {
+    this.setState({
+      counter: 0
+    });
+  }
+
+  incrementCounter = () => {
+    this.setState({
+      counter: parseInt(this.state.counter) + 1 
+    });
+  }
+  
+  decrementCounter = () => {
+    this.setState({
+      counter: parseInt(this.state.counter) - 1 
+    });
+  }
+
+  render() {
+    return (
+      <>
+        <div className='Titulo'>
+          Assign Statement
+        </div>
+        <div>
+          Counter: {this.state.counter}
+        </div>
+        <Increment
+          incrementCounter = {this.incrementCounter}
+        />
+        <Decrement
+          decrementCounter = {this.decrementCounter}
+        />
+        <Reset
+          resetCounter = {this.resetCounter}
+        />
+      </>
+    )
+  }
 }
 
 export default App;
